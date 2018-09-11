@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hik.dao.CompanyAstMapper">
+	<resultMap id="CompanyResultMap" type="com.hik.entity.vo.CompanyVO">
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="name" jdbcType="VARCHAR" property="name" />
+		<result column="world" jdbcType="VARCHAR" property="world" />
+		<result column="scale" jdbcType="VARCHAR" property="scale" />
+		<result column="address" jdbcType="VARCHAR" property="address" />
+		<result column="gmtCreate" jdbcType="VARCHAR" property="gmtCreate" />
+		<result column="gmtModify" jdbcType="VARCHAR" property="gmtModify" />
+		<result column="dr" jdbcType="BIT" property="dr" />
+		<result column="about" jdbcType="LONGVARCHAR" property="about" />
+		<result column="success" jdbcType="BIT" property="success" />
+	</resultMap>
+	<!-- 公司 设备 一对多 -->
+	<resultMap id="CompanyDevicesResultMap" type="com.hik.entity.vo.CompanyVO"
+		extends="CompanyResultMap">
+		<collection property="devices" ofType="com.hik.entity.Device">
+			<id column="companyid" property="id" />
+			<result column="jId" jdbcType="INTEGER" property="id" />
+			<result column="jName" jdbcType="VARCHAR" property="name" />
+			<result column="jDevicecode" jdbcType="INTEGER" property="devicecode" />
+			<result column="jAddress" jdbcType="VARCHAR" property="address" />
+			<result column="jGmtCreate" jdbcType="VARCHAR" property="gmtCreate" />
+			<result column="jGmtModify" jdbcType="VARCHAR" property="gmtModify" />
+			<result column="jDr" jdbcType="BIT" property="dr" />
+			<result column="jdeviceDescribe" jdbcType="LONGVARCHAR" property="deviceDescribe" />
+			<result column="jSuccess" jdbcType="BIT" property="success" />
+		</collection>
+	</resultMap>
+
+	<!-- 公司 设备 用户 关联 -->
+	<resultMap extends="CompanyDevicesResultMap" id="CompanyAscUsersResultMap"
+		type="com.hik.entity.vo.CompanyVO">
+		<collection property="userDeviceVOS" ofType="com.hik.entity.vo.UserDeviceVO">
+			<result column="vId" property="id" />
+			<result column="jCompanyId" property="companyId" />
+			<result column="vSuccess" property="success" />
+			<result column="vGmtCreate" property="gmtCreate" />
+			<result column="vGmtModify" property="gmtModify" />
+			<result column="vDr" property="dr" />
+			<association property="user" javaType="com.hik.entity.User">
+				<result column="uId" property="id" />
+				<result column="uUsername" property="username" />
+			</association>
+			<association property="device" javaType="com.hik.entity.Device">
+				<id column="id" property="deviceid" />
+				<result column="jId" property="id" />
+				<result column="jName" property="name" />
+				<result column="jSuccess" property="success" />
+			</association>
+		</collection>
+	</resultMap>
+
+	<!-- 公司sql -->
+	<sql id="companySql">
+		c.id, c.name, c.world, c.scale, c.address,
+		c.gmtCreate,
+		c.gmtModify, c.dr,c.about,c.success
+	</sql>
+
+	<!-- 设备sql -->
+	<!-- 统一取别名，避免名字冲突，导致获取不到值 -->
+	<sql id="deviceSql">
+		j.id as jId,j.name as jName,j.devicecode as
+		jDevicecode,j.address as jAddress,j.deviceDescribe as jdeviceDescribe,j.gmtCreate as jGmtCreate,j.gmtModify as
+		jGmtModify,j.dr as jDr,j.success as jSuccess
+	</sql>
+
+	<sql id="userSql">
+		u.id as uId,u.username as uUsername,u.password as
+		uPassword,
+		u.realname as uRealname,u.userType as uUserType,u.sex as
+		uSex,
+		u.birthday as uBirthday,u.phoneNumber as uPhoneNumber,
+		u.email as
+		uEmail,u.gmtCreate as uGmtCreate,u.gmtModify as uGmtModify,
+		u.dr as uDr
+	</sql>
+
+
+	<!-- 查询某设备信息 返回的是这项设备信息、公司信息 -->
+	<select id="findJobDetail" parameterType="Map"
+		resultMap="CompanyDevicesResultMap">
+		select
+		<include refid="companySql" />
+		,
+		<include refid="deviceSql" />
+		from company c  inner join
+		device j on c.id=j.companyid
+		<where>
+			<if test="id != null">
+				and c.id =#{comapnyId}
+			</if>
+
+			<if test="deviceid != null">
+				and j.id =#{deviceid}
+			</if>
+		</where>
+	</select>
+
+	<!-- 查询公司信息、生效的岗位信息 -->
+	<select id="findCompanyRecruitJobs" parameterType="Map"
+		resultMap="CompanyDevicesResultMap">
+		select
+		<include refid="companySql" />
+		,
+		<include refid="deviceSql" />
+		from company c
+		inner join device
+		j on c.id=j.companyid
+		<where>
+			<if test="id != null">
+				and c.id =#{id}
+			</if>
+
+			and (j.lapse=0||j.lapse is null)
+		</where>
+
+	</select>
+	<!-- 用户申请某个岗位后，公司如果批准，就可以通过用户id查找公司的信息 -->
+	<select id="findCompanyInfoByUserId" parameterType="java.lang.Integer"
+		resultMap="CompanyResultMap">
+		select
+		<include refid="companySql" />
+		from devicewithuser v inner join device j on v.deviceid = j.id inner
+		join company c
+		on
+		j.companyid = c.id
+		where v.userid=#{id}
+	</select>
+
+
+</mapper>

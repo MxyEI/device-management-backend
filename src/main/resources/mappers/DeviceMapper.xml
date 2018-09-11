@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hik.dao.DeviceMapper">
+	<resultMap id="BaseResultMap" type="com.hik.entity.Device">
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="companyId" jdbcType="INTEGER" property="companyId" />
+		<result column="name" jdbcType="VARCHAR" property="name" />
+
+		<result column="devicecode" jdbcType="INTEGER" property="devicecode" />
+		<result column="address" jdbcType="VARCHAR" property="address" />
+
+		<result column="gmtCreate" jdbcType="VARCHAR" property="gmtCreate" />
+		<result column="gmtModify" jdbcType="VARCHAR" property="gmtModify" />
+		<result column="dr" jdbcType="BIT" property="dr" />
+		<result column="lapse" jdbcType="BIT" property="lapse" />
+		<result column="success" jdbcType="BIT" property="success" />
+	</resultMap>
+	<resultMap extends="BaseResultMap" id="ResultMapWithBLOBs"
+		type="com.hik.entity.Device">
+		<result column="deviceDescribe" jdbcType="LONGVARCHAR" property="deviceDescribe" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, companyId, name, devicecode, address,
+		gmtCreate,
+		gmtModify, dr,lapse,success
+	</sql>
+	<sql id="Blob_Column_List">
+		deviceDescribe
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="ResultMapWithBLOBs">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from device
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from device
+		where id = #{id,jdbcType=INTEGER} and id not in(select deviceid from
+		devicewithuser)
+	</delete>
+
+	<insert id="insertSelective" parameterType="com.hik.entity.Device">
+		insert into device
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="companyId != null">
+				companyId,
+			</if>
+			<if test="name != null">
+				name,
+			</if>
+
+			<if test="devicecode != null">
+				devicecode,
+			</if>
+			<if test="address != null">
+				address,
+			</if>
+
+			<if test="gmtCreate != null">
+				gmtCreate,
+			</if>
+			<if test="gmtModify != null">
+				gmtModify,
+			</if>
+			<if test="dr != null">
+				dr,
+			</if>
+			<if test="lapse != null">
+				lapse,
+			</if>
+			<if test="deviceDescribe != null">
+				devicedescribe,
+			</if>
+			<if test="success != null">
+				success,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="companyId != null">
+				#{companyId,jdbcType=INTEGER},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+
+			<if test="devicecode != null">
+				#{devicecode,jdbcType=INTEGER},
+			</if>
+			<if test="address != null">
+				#{address,jdbcType=VARCHAR},
+			</if>
+			
+			<if test="gmtCreate != null">
+				#{gmtCreate,jdbcType=VARCHAR},
+			</if>
+			<if test="gmtModify != null">
+				#{gmtModify,jdbcType=VARCHAR},
+			</if>
+			<if test="dr != null">
+				#{dr,jdbcType=BIT},
+			</if>
+			<if test="lapse != null">
+				#{lapse,jdbcType=BIT},
+			</if>
+			<if test="deviceDescribe != null">
+				#{deviceDescribe,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="success != null">
+				#{success,jdbcType=BIT},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.hik.entity.Device">
+		update device
+		<set>
+			<if test="companyId != null">
+				companyId = #{companyId,jdbcType=INTEGER},
+			</if>
+			<if test="name != null">
+				name = #{name,jdbcType=VARCHAR},
+			</if>
+
+			<if test="devicecode != null">
+				devicecode = #{devicecode,jdbcType=INTEGER},
+			</if>
+			<if test="address != null">
+				address = #{address,jdbcType=VARCHAR},
+			</if>
+			
+			<if test="gmtModify != null">
+				gmtModify = #{gmtModify,jdbcType=VARCHAR},
+			</if>
+			<if test="deviceDescribe != null">
+				deviceDescribe = #{deviceDescribe,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="lapse != null">
+				lapse = #{lapse,jdbcType=BIT},
+			</if>
+			<if test="success != null">
+				success = #{success,jdbcType=BIT},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hik.entity.Device">
+		update
+		device
+		set companyId = #{companyId,jdbcType=INTEGER},
+		name =
+		#{name,jdbcType=VARCHAR},
+		
+		devicecode =
+		#{devicecode,jdbcType=INTEGER},
+		address = #{address,jdbcType=VARCHAR},
+		
+		gmtModify = #{gmtModify,jdbcType=VARCHAR},
+		deviceDescribe =
+		#{deviceDescribe,jdbcType=LONGVARCHAR},
+		lapse =
+		#{lapse,jdbcType=BIT},success =
+		#{success,jdbcType=BIT}
+		where
+		id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.hik.entity.Device">
+		update device
+		set
+		companyId = #{companyId,jdbcType=INTEGER},
+		name =
+		#{name,jdbcType=VARCHAR},
+		major = #{major,jdbcType=VARCHAR},
+		devicecode =
+		#{devicecode,jdbcType=INTEGER},
+		address = #{address,jdbcType=VARCHAR},
+		degree =
+		#{degree,jdbcType=VARCHAR},
+		money = #{money,jdbcType=VARCHAR},
+		gmtModify = #{gmtModify,jdbcType=VARCHAR},
+		dr = #{dr,jdbcType=BIT},
+		lapse = #{lapse,jdbcType=BIT},success =
+		#{success,jdbcType=BIT}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<select id="selectDevicesByName" parameterType="Map" resultMap="ResultMapWithBLOBs">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from device
+		<where>
+			<if test="name!=null and name!='' ">
+				and name like #{name}
+			</if>
+			<if test="companyId!=null and companyId!='' ">
+				and companyId = #{companyId}
+			</if>
+		</where>
+		<if test="sort!=null and sort!='' and order!=null and order!=''">
+			order by ${sort} ${order}
+		</if>
+		<if test="start!=null and size!=null">
+			limit #{start},#{size}
+		</if>
+	</select>
+	<select id="getTotalDevicesByName" parameterType="Map" resultType="Long">
+		select count(*)
+		from device
+		<where>
+			<if test="name!=null and name!='' ">
+				and name like #{name}
+			</if>
+			<if test="companyId!=null and companyId!='' ">
+				and companyId = #{companyId}
+			</if>
+		</where>
+	</select>
+</mapper>

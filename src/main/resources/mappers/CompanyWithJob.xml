@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hik.dao.CompanyWithJobMapper">
+
+	<!-- 公司 岗位 关联 -->
+	<resultMap id="CompanyJobAscResultMap" type="com.hik.entity.vo.CompanyJobVO">
+		<result column="jSuccess" property="success" />
+		<result column="jGmtCreate" property="gmtCreate" />
+		<result column="jGmtModify" property="gmtModify" />
+		<association property="device" javaType="com.hik.entity.Device">
+			<result column="jId" property="id" />
+			<result column="jName" property="name" />
+			<result column="jSuccess" property="success" />
+			<result column="jGmtCreate" property="gmtCreate" />
+			<result column="jGmtModify" property="gmtModify" />
+		</association>
+		<association property="company" javaType="com.hik.entity.Company">
+			<result column="cId" property="id" />
+			<result column="comName" property="name" />
+		</association>
+
+	</resultMap>
+
+	<!-- 管理部门查询实习单位发布的新岗位信息的数量 -->
+	<select id="getAllJobInfoWithNewAddCounts" parameterType="Map" resultType="Long">
+		select  count(*)
+		from device j  inner join company com on j.companyid= com.id
+		<where>
+			<if test="comname != null and comname !=''">
+				and com.name like #{comname}
+			</if>
+
+			<if test="jobname != null and jobname !=''">
+				and j.name like #{jobname}
+			</if>
+		</where>
+	</select>
+
+	<!-- 管理部门查询实习单位发布的新岗位信息 -->
+	<select id="getAllJobInfoWithNewAdd" parameterType="Map" resultMap="CompanyJobAscResultMap">
+		select  j.id as jId,j.name as jName,j.gmtCreate as jGmtCreate,j.gmtModify as jGmtModify,com.id as cId,com.name as comName,j.success as jSuccess
+		from device j  inner join company com on j.companyid= com.id
+		<where>
+			<if test="comname != null and comname !=''">
+				and com.name like #{comname}
+			</if>
+
+			<if test="jobname != null and jobname !=''">
+				and j.name like #{jobname}
+			</if>
+		</where>
+		<if test="sort!=null and sort!='' and order!=null and order!=''">
+			order by ${sort} ${order}
+		</if>
+		<if test="start!=null and size!=null">
+			limit #{start},#{size}
+		</if>
+	</select>
+
+</mapper>
