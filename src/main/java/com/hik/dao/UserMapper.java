@@ -7,43 +7,43 @@ import com.hik.entity.User;
 
 /**
  * @Description: 用户Mapper
- * @author: hw
- * @date: 2018年4月1日 下午12:51:22
+ * @author: mxy
+ *
  */
 public interface UserMapper {
 
 	/**
 	 * @Description: 登录
-	 * @author: hw
-	 * @date: 2018年4月1日 下午12:51:34
+	 * @author: mxy
+	 *
 	 */
 	User login(User user);
 
 	/**
 	 * @Description: 校验密码
-	 * @author: hw
+	 * @author: mxy
 	 * @date: 2018年4月1日 下午12:51:41
 	 */
 	User checkPwd(User user);
 
 	/**
 	 * @Description: 检查用户名是否重复
-	 * @author: hw
-	 * @date: 2018年4月1日 下午12:51:50
+	 * @author: mxy
+	 *
 	 */
 	int checkName(String name);
 
 	/**
 	 * @Description: 查询用户
-	 * @author: hw
-	 * @date: 2018年4月1日 下午12:52:04
+	 * @author: mxy
+	 *
 	 */
 	List<User> findUsers(Map<String, Object> map);
 
 	/**
 	 * @Description: 获取查询用户数量
-	 * @author: hw
-	 * @date: 2018年4月1日 下午12:52:12
+	 * @author: mxy
+	 *
 	 */
 	Long getTotalUser(Map<String, Object> map);
 
