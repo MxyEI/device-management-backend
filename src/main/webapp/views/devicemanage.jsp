@@ -27,11 +27,11 @@
 <body style="margin: 1px;" id="ff">
 	<div id="tb">
 		<div>
-			<a onclick="openJobAddDialog()" class="easyui-linkbutton"
+			<a onclick="openDeviceAddDialog()" class="easyui-linkbutton"
 				iconCls="icon-add" plain="true">添加</a>
-			<a onclick="openJobModifyDialog()" class="easyui-linkbutton"
+			<a onclick="openDeviceModifyDialog()" class="easyui-linkbutton"
 				iconCls="icon-edit" plain="true">修改</a>
-			<a onclick="deleteJob()" class="easyui-linkbutton" iconCls="icon-remove" plain="true">删除</a>
+			<a onclick="deleteDevice()" class="easyui-linkbutton" iconCls="icon-remove" plain="true">删除</a>
 		</div>
 		<div>
 			&nbsp;设备名称：&nbsp;<input type="text" id="jobname" size="20"
@@ -218,7 +218,7 @@
 	}
 
 	/* 删除设备 */
-	function deleteJob() {
+	function deleteDevice() {
 		var selectedRows = $("#dg").datagrid('getSelections');
 		if (selectedRows.length == 0) {
 			$.messager.alert("系统提示", "请选择要删除的数据！");
@@ -250,7 +250,7 @@
 	}
 
 	/* 打开设备添加对话框 */
-	function openJobAddDialog() {
+	function openDeviceAddDialog() {
         deviceDescribe.html('');
         deviceDescribe.edit.setHeight(deviceDescribe.edit.doc.body.scrollHeight);
 		method = "POST";
@@ -293,7 +293,7 @@
 	}
 
 	/* 打开设备修改对话框 */
-	function openJobModifyDialog() {
+	function openDeviceModifyDialog() {
 		var selectedRows = $("#dg").datagrid('getSelections');
 		if (selectedRows.length != 1) {
 			$.messager.alert("系统提示", "请选择一条要编辑的数据！");
