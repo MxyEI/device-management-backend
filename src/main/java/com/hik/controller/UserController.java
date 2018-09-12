@@ -30,8 +30,8 @@ import net.sf.json.JSONObject;
 
 /**
  * @Description: 用户Controller
- * @author: hw
- * @date: 2018年3月20日 下午1:40:51
+ * @author: mxy
+ *
  */
 @Controller
 @RequestMapping("/users")
@@ -43,8 +43,8 @@ public class UserController {
 
 	/**
 	 * @Description: 登录
-	 * @author: hw
-	 * @date: 2018年3月20日 下午1:41:05
+	 * @author: mxy
+	 *
 	 */
 	@RequestMapping(value = "/cookie", method = RequestMethod.GET)
 	@ResponseBody
@@ -68,8 +68,8 @@ public class UserController {
 
 	/**
 	 * @Description:添加用户
-	 * @author: hw
-	 * @date: 2018年3月30日 下午1:22:44
+	 * @author: mxy
+	 *
 	 */
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	@ResponseBody
@@ -91,8 +91,8 @@ public class UserController {
 
 	/**
 	 * @Description: 更新信息
-	 * @author: hw
-	 * @date: 2018年3月28日 下午1:45:59
+	 * @author: mxy
+	 *
 	 */
 	@RequestMapping(value = "", method = RequestMethod.PATCH)
 	@ResponseBody
@@ -115,8 +115,8 @@ public class UserController {
 
 	/**
 	 * @Description: 获取用户信息
-	 * @author: hw
-	 * @date: 2018年3月28日 下午1:46:06
+	 * @author: mxy
+	 *
 	 */
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	@ResponseBody
@@ -159,8 +159,8 @@ public class UserController {
 	 * @Description: 批量删除user
 	 * @param ids
 	 *            user ids id1,id2,id3
-	 * @author: hw
-	 * @date: 2018年3月30日 下午1:35:35
+	 * @author: mxy
+	 *
 	 */
 	@RequestMapping(value = "/{ids}", method = RequestMethod.DELETE)
 	@ResponseBody
@@ -175,8 +175,8 @@ public class UserController {
 
 	/**
 	 * @Description: 校验密码
-	 * @author: hw
-	 * @date: 2018年3月31日 下午7:08:28
+	 * @author: mxy
+	 *
 	 */
 	@RequestMapping(value = "/verifyPwd", method = RequestMethod.GET)
 	@ResponseBody
