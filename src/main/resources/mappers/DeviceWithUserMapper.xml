@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.hik.dao.devicewithuserMapper">
+<mapper namespace="com.hik.dao.DeviceWithUserMapper">
 	<resultMap id="BaseResultMap" type="com.hik.entity.DeviceWithUser">
 		<id column="id" jdbcType="INTEGER" property="id" />
 		<result column="userid" jdbcType="INTEGER" property="userid" />
-		<result column="deviceid" jdbcType="INTEGER" property="deviceId" />
+		<result column="deviceid" jdbcType="INTEGER" property="deviceid" />
 		<result column="success" jdbcType="BIT" property="success" />
 		<result column="gmtCreate" jdbcType="VARCHAR" property="gmtCreate" />
 		<result column="gmtModify" jdbcType="VARCHAR" property="gmtModify" />
@@ -27,8 +27,8 @@
 		*
 		from devicewithuser
 		where userid = #{userid,jdbcType=INTEGER}
-		<if test="deviceId != null">
-			and deviceid = #{deviceId,jdbcType=INTEGER}
+		<if test="deviceid != null">
+			and deviceid = #{deviceid,jdbcType=INTEGER}
 		</if>
 	</select>
 
