@@ -24,7 +24,7 @@
 	<select id="selectByuidjid" parameterType="Map"
 			resultMap="BaseResultMap">
 		select
-		*
+		<include refid="Base_Column_List" />
 		from devicewithuser
 		where userid = #{userid,jdbcType=INTEGER}
 		<if test="deviceid != null">
@@ -56,55 +56,15 @@
 	</delete>
 
 	<insert id="insertSelective" parameterType="com.hik.entity.DeviceWithUser" useGeneratedKeys="true" keyProperty="id">
-		insert into devicewithuser
-		<trim prefix="(" suffix=")" suffixOverrides=",">
-			<if test="id != null">
-				id,
-			</if>
-			<if test="userid != null">
-				userid,
-			</if>
-			<if test="deviceid != null">
-				deviceid,
-			</if>
-
-			<if test="success != null">
-				success,
-			</if>
-			<if test="gmtCreate != null">
-				gmtCreate,
-			</if>
-			<if test="gmtModify != null">
-				gmtModify,
-			</if>
-			<if test="dr != null">
-				dr,
-			</if>
-		</trim>
-		<trim prefix="values (" suffix=")" suffixOverrides=",">
-			<if test="id != null">
-				#{id,jdbcType=INTEGER},
-			</if>
-			<if test="userid != null">
-				#{userid,jdbcType=INTEGER},
-			</if>
-			<if test="deviceid != null">
-				#{deviceid,jdbcType=INTEGER},
-			</if>
-
-			<if test="success != null">
-				#{success,jdbcType=BIT},
-			</if>
-			<if test="gmtCreate != null">
-				#{gmtCreate,jdbcType=VARCHAR},
-			</if>
-			<if test="gmtModify != null">
-				#{gmtModify,jdbcType=VARCHAR},
-			</if>
-			<if test="dr != null">
-				#{dr,jdbcType=BIT},
-			</if>
-		</trim>
+		insert into devicewithuser (id,userid,
+		deviceid,
+		success, gmtCreate, gmtModify,
+		dr)
+		values
+		(#{id,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER},#{deviceid,jdbcType=INTEGER},
+		#{success,jdbcType=BIT}, #{gmtCreate,jdbcType=VARCHAR},
+		#{gmtModify,jdbcType=VARCHAR},
+		#{dr,jdbcType=BIT})
 	</insert>
 	<update id="updateByPrimaryKeySelective" parameterType="com.hik.entity.DeviceWithUser" useGeneratedKeys="true" keyProperty="id">
 		update devicewithuser

@@ -91,10 +91,10 @@
 			success : function(result) {
 				if (result.resultCode == 200 && result.data != null
 						&& result.data.data != null
-						&& result.data.data.deviceId != null) {
+						&& result.data.data.deviceid != null) {
 				    		vId=result.data.data.id;
-							if (isNull(jId) || result.data.data.deviceId == jId) {
-							jId = result.data.data.deviceId + "";
+							if (isNull(jId) || result.data.data.deviceid == jId) {
+							jId = result.data.data.deviceid + "";
 							setSuccess(result.data.data.success);
 							$("#apply").text("取消申请");
 						} else if (isNotNull(jId)) {
@@ -164,7 +164,7 @@
 			url : url,
 			data : {
 				"userid" : getCookie("id"),
-				"deviceId" : jId
+				"deviceid" : jId
 			},
 			success : function(result) {
 				if (result.resultCode == 200) {
