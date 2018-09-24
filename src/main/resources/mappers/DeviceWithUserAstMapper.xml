@@ -18,6 +18,7 @@
 			<id column="id" property="id" />
 			<result column="jId" property="id" />
 			<result column="jName" property="name" />
+			<result column="jDevicecode" property="devicecode" />
 		</association>
 		<association property="company" javaType="com.hik.entity.Company">
 			<id column="id" property="id" />
