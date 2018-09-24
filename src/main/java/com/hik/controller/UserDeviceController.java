@@ -130,14 +130,8 @@ public class UserDeviceController {
 			}
 			map.put("sort", sort);
 		}
-//		if (userJob.getUser() != null && userJob.getUser().getRealname() != null) {
-//			map.put("realname", StringUtil.formatLike(userJob.getUser().getRealname()));
-//		}
-//		if (userJob.getDevice() != null && userJob.getDevice().getName() != null) {
-//			map.put("jobname", StringUtil.formatLike(userJob.getDevice().getName()));
-//		}
 
-		//按学号（用户名）和真实姓名搜索
+		//按用户名）和真实姓名搜索
 		if (userJob.getUser() != null && userJob.getUser().getUsername() != "") {
 			map.put("username", StringUtil.formatLike(userJob.getUser().getUsername()));
 		}
@@ -145,14 +139,13 @@ public class UserDeviceController {
 			map.put("realname", StringUtil.formatLike(userJob.getUser().getRealname()));
 		}
 
-		//log.info(userJob);
 		List<UserDeviceVO> list = userDeviceService.findAscUserJobsWithSuccess(map);
 		Long total = userDeviceService.getTotlaAscUserJobsWithSuccess(map);
 		JSONObject result = new JSONObject();
 		JSONArray jsonArray = JSONArray.fromObject(list);
 		result.put("rows", jsonArray);
 		result.put("total", total);
-		log.info("request: userjobs/list , map: " + map.toString());
+		log.info("request: userdevices/list , map: " + map.toString());
 		ResponseUtil.write(response, result);
 		return null;
 	}
@@ -162,8 +155,8 @@ public class UserDeviceController {
 
 	/**
 	 * @Description: 列出某个用户所有的申请信息
-	 * @author: hw
-	 * @date: 2018年4月28日 下午1:46:21
+	 * @author: mxy
+	 *
 	 */
 	@RequestMapping(value = "/datagridwithmyapply/{userid}", method = RequestMethod.GET)
 	public String listwithusersapply(@PathVariable(value = "userid") Integer userid,@RequestParam(value = "page", required = false) String page,
@@ -177,9 +170,7 @@ public class UserDeviceController {
 			map.put("start", pageBean.getStart());
 			map.put("size", pageBean.getPageSize());
 		}
-//		if (userJob.getUserId() != null) {
-//			map.put("userid", userid);
-//		}
+
 		map.put("userid", userid);
 		if (sort != null && order != null) {
 			map.put("order", order);
@@ -199,14 +190,14 @@ public class UserDeviceController {
 		if (userJob.getDevice() != null && userJob.getDevice().getName() != null) {
 			map.put("jobname", StringUtil.formatLike(userJob.getDevice().getName()));
 		}
-		//log.info(userJob);
+
 		List<UserDeviceVO> list = userDeviceService.findAscUserJobsWithUserid(map);
 		Long total = userDeviceService.getTotlaAscUserJobsWithuser(map);
 		JSONObject result = new JSONObject();
 		JSONArray jsonArray = JSONArray.fromObject(list);
 		result.put("rows", jsonArray);
 		result.put("total", total);
-		log.info("request: userjobs/list , map: " + map.toString());
+		log.info("request: userDevices/list , map: " + map.toString());
 		ResponseUtil.write(response, result);
 		return null;
 	}
