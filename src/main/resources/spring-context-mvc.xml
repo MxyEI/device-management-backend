@@ -72,4 +72,8 @@
     <context:component-scan base-package="com.hik.controller" ></context:component-scan>
     <!-- swagger end -->
 
+    <mvc:cors>
+        <mvc:mapping path="/**" allowed-origins="*" allow-credentials="true" max-age="1800" allowed-methods="GET,POST,OPTIONS,DELETE,PATCH"/>
+    </mvc:cors>
+
 </beans>
