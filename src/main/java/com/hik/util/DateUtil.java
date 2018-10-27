@@ -6,8 +6,8 @@ import java.util.Date;
 
 /**
  * @Description: 日期工具类
- * @author: hw   
- * @date: 2018年3月22日 下午12:04:27 
+ * @author: mxy
+ *
  */
 public class DateUtil {
 

@@ -4,8 +4,8 @@ import java.security.MessageDigest;
 
 /**
  * @Description: MD5工具类
- * @author: hw   
- * @date: 2018年3月20日 下午1:39:11 
+ * @author: mxy
+ *
  */
 public class MD5Util {
 

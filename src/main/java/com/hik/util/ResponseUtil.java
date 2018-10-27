@@ -6,8 +6,8 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * @Description: Response工具类
- * @author: hw
- * @date: 2018年3月22日 下午12:05:17
+ * @author: mxy
+ *
  */
 public class ResponseUtil {
 

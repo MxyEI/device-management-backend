@@ -5,8 +5,8 @@ import java.util.List;
 
 /**
  * @Description: String工具类
- * @author: hw
- * @date: 2018年3月28日 下午5:10:03
+ * @author: mxy
+ *
  */
 public class StringUtil {
 
@@ -28,8 +28,8 @@ public class StringUtil {
 
 	/**
 	 * @Description: 格式化str, %str%
-	 * @author: hw
-	 * @date: 2018年3月28日 下午5:12:42
+	 * @author: mxy
+	 *
 	 */
 	public static String formatLike(String str) {
 		if (isNotEmpty(str)) {
@@ -43,8 +43,8 @@ public class StringUtil {
 	 * @Description: 格式化ids
 	 * @param ids
 	 *            1,2,3
-	 * @author: hw
-	 * @date: 2018年3月30日 下午1:48:51
+	 * @author: mxy
+	 *
 	 */
 	public static List<Integer> formatIdsToList(String ids) {
 		List<Integer> list = new ArrayList<Integer>();
