@@ -1,7 +1,10 @@
 package com.hik.service;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.*;
 
 import com.hik.dao.UserWithDeviceAstMapper;
 import com.hik.dao.DeviceWithUserMapper;
@@ -17,7 +20,8 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class UserDeviceServiceImpl implements IUserDeviceService {
-
+	static DeviceWithUser dw = null;
+	int temp = 0;
 	@Autowired
 	DeviceWithUserMapper userDeviceMapper;
 
@@ -26,6 +30,31 @@ public class UserDeviceServiceImpl implements IUserDeviceService {
 
 	@Override
 	public int deleteByPrimaryKey(Integer id) {
+//		Future<Integer> future = null;
+//		ExecutorService pool = Executors.newSingleThreadExecutor();
+//		try{
+//			future = pool.submit(new Callable<Integer>() {
+//									 @Override
+//									 public Integer call() throws Exception {
+//										 temp = userDeviceMapper.deleteByPrimaryKey(id);
+//										 return temp;
+//									 }
+//								 }
+//			);
+//
+//		}catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//
+//		while(true){
+//			try {
+//				return future.get();
+//			} catch (InterruptedException e) {
+//				e.printStackTrace();
+//			} catch (ExecutionException e) {
+//				e.printStackTrace();
+//			}
+//		}
 		return userDeviceMapper.deleteByPrimaryKey(id);
 	}
 
@@ -99,6 +128,7 @@ public class UserDeviceServiceImpl implements IUserDeviceService {
 	public Long getTotlaAscUserJobsWithuser(Map<String,Object> map) {
 		return userDeviceAstMapper.getTotlaAscUserJobsWithuser(map);
 	}
+
 
 
 }

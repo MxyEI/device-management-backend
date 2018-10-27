@@ -3,6 +3,8 @@ package com.hik.controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -168,8 +170,16 @@ public class UserController {
 		if (ids.trim().length() == 0) {
 			return ResultGenerator.genFailResult("ERROR");
 		}
-		userService.deleteByIds(StringUtil.formatIdsToList(ids));
-		log.info("request: article/delete , ids: " + ids);
+		ExecutorService pool = Executors.newSingleThreadExecutor();
+		pool.execute(new Runnable() {
+			@Override
+			public void run() {
+				userService.deleteByIds(StringUtil.formatIdsToList(ids));
+			}
+		});
+
+		pool.shutdown();
+		log.info("request: users/delete , ids: " + ids);
 		return ResultGenerator.genSuccessResult();
 	}
 

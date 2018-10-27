@@ -6,8 +6,8 @@ import lombok.Data;
 
 /**
  * @Description: 用户
- * @author: hw
- * @date: 2018年3月28日 下午1:40:53
+ * @author: mxy
+ *
  */
 @Data
 public class User implements Serializable{

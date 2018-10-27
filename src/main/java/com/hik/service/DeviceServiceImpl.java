@@ -10,9 +10,9 @@ import org.springframework.stereotype.Service;
 import com.hik.dao.DeviceMapper;
 
 /**
- * @Description: 岗位ServiceImpl
- * @author: hw   
- * @date: 2018年3月21日 下午8:31:03 
+ * @Description: 设备ServiceImpl
+ * @author: mxy
+ *
  */
 @Service
 public class DeviceServiceImpl implements IDeviceService {

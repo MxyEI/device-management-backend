@@ -50,7 +50,7 @@ public class UserDeviceController {
 	public String list(@RequestParam(value = "page", required = false) String page,
 			@RequestParam(value = "rows", required = false) String rows,
 			@RequestParam(value = "sort", required = false) String sort,
-			@RequestParam(value = "order", required = false) String order, UserDeviceVO userJob,
+			@RequestParam(value = "order", required = false) String order, UserDeviceVO userDeviceVO,
 			HttpServletResponse response) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
 		if (page != null && rows != null) {
@@ -58,8 +58,8 @@ public class UserDeviceController {
 			map.put("start", pageBean.getStart());
 			map.put("size", pageBean.getPageSize());
 		}
-		if (userJob.getCompanyId() != null) {
-			map.put("companyId", userJob.getCompanyId());
+		if (userDeviceVO.getCompanyId() != null) {
+			map.put("companyId", userDeviceVO.getCompanyId());
 		}
 		if (sort != null && order != null) {
 			map.put("order", order);
@@ -73,74 +73,15 @@ public class UserDeviceController {
 			}
 			map.put("sort", sort);
 		}
-//		if (userJob.getUser() != null && userJob.getUser().getRealname() != null) {
-//			map.put("username", StringUtil.formatLike(userJob.getUser().getRealname()));
-//		}
 
-		//只按学号（用户名）搜索
-		if (userJob.getUser() != null && userJob.getUser().getUsername() != "") {
-			map.put("username", StringUtil.formatLike(userJob.getUser().getUsername()));
+
+		//按设备名称搜索
+		if (userDeviceVO.getDevice() != null && userDeviceVO.getDevice().getName() != "") {
+			map.put("name", StringUtil.formatLike(userDeviceVO.getDevice().getName()));
 		}
 
-//		if (userJob.getDevice() != null && userJob.getDevice().getName() != null) {
-//			map.put("jobname", StringUtil.formatLike(userJob.getDevice().getName()));
-//		}
-		//log.info(userJob);
 		List<UserDeviceVO> list = userDeviceService.findAscUserJobs(map);
 		Long total = userDeviceService.getTotlaAscUserJobs(map);
-		JSONObject result = new JSONObject();
-		JSONArray jsonArray = JSONArray.fromObject(list);
-		result.put("rows", jsonArray);
-		result.put("total", total);
-		log.info("request: userjobs/list , map: " + map.toString());
-		ResponseUtil.write(response, result);
-		return null;
-	}
-
-
-	/**
-	 * @Description: 列出某个公司的申请成功的用户和申请岗位信息
-	 * @author: hw
-	 * @date: 2018年3月28日 下午1:46:21
-	 */
-	@RequestMapping(value = "/datagridwithsuccess", method = RequestMethod.GET)
-	public String listwithsuccess(@RequestParam(value = "page", required = false) String page,
-					   @RequestParam(value = "rows", required = false) String rows,
-					   @RequestParam(value = "sort", required = false) String sort,
-					   @RequestParam(value = "order", required = false) String order, UserDeviceVO userJob,
-					   HttpServletResponse response) throws Exception {
-		Map<String, Object> map = new HashMap<String, Object>();
-		if (page != null && rows != null) {
-			PageBean pageBean = new PageBean(Integer.parseInt(page), Integer.parseInt(rows));
-			map.put("start", pageBean.getStart());
-			map.put("size", pageBean.getPageSize());
-		}
-		if (userJob.getCompanyId() != null) {
-			map.put("companyId", userJob.getCompanyId());
-		}
-		if (sort != null && order != null) {
-			map.put("order", order);
-			// 表格的字段名和数据库的字段名不一样，所以需要将sort转换成数据库中对应的字段名
-			if (sort.indexOf(".") < 0) {
-				sort = "v." + sort;
-			} else {
-				String pre = sort.substring(0, sort.indexOf("."));
-				String tableName = (pre.equals("user") ? "u" : pre.equals("device") ? "j" : "v");
-				sort = tableName + sort.substring(sort.indexOf("."));
-			}
-			map.put("sort", sort);
-		}
-
-		//按用户名）和真实姓名搜索
-		if (userJob.getUser() != null && userJob.getUser().getUsername() != "") {
-			map.put("username", StringUtil.formatLike(userJob.getUser().getUsername()));
-		}
-		if (userJob.getUser() != null && userJob.getUser().getRealname() != "") {
-			map.put("realname", StringUtil.formatLike(userJob.getUser().getRealname()));
-		}
-
-		List<UserDeviceVO> list = userDeviceService.findAscUserJobsWithSuccess(map);
-		Long total = userDeviceService.getTotlaAscUserJobsWithSuccess(map);
 		JSONObject result = new JSONObject();
 		JSONArray jsonArray = JSONArray.fromObject(list);
 		result.put("rows", jsonArray);
@@ -149,8 +90,6 @@ public class UserDeviceController {
 		ResponseUtil.write(response, result);
 		return null;
 	}
-
-
 
 
 	/**

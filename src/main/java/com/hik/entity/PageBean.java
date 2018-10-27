@@ -7,8 +7,8 @@ import lombok.Data;
 
 /**
  * @Description: 页面
- * @author: hw
- * @date: 2018年3月28日 下午1:38:54
+ * @author: mxy
+ *
  */
 @Data
 @AllArgsConstructor
@@ -23,12 +23,4 @@ public class PageBean implements Serializable{
 		return (page - 1) * pageSize;
 	}
 
-//	public int getPageSize(){
-//		return 10;
-//	}
-//
-//	public PageBean(int page,int pageSize){
-//		this.page=page;
-//		this.pageSize=pageSize;
-//	}
 }

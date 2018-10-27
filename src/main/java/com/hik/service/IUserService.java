@@ -7,8 +7,8 @@ import com.hik.entity.User;
 
 /**
  * @Description: 用户IService
- * @author: hw
- * @date: 2018年3月20日 下午1:41:54
+ * @author: mxy
+ *
  */
 public interface IUserService {
 	int deleteByPrimaryKey(Integer pk);
