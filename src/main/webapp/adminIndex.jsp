@@ -89,22 +89,7 @@
 			}
 		});
 	}
-	<%--loginRedirect();--%>
-	<%--function loginRedirect() {--%>
-		<%--var usertype = getCookie("usertype");--%>
-		<%--switch (usertype) {--%>
-		<%--case 'teacher':--%>
-			<%--window.location.href = "${pageContext.request.contextPath}/teacherIndex.jsp";--%>
-			<%--break;--%>
-		<%--case 'company':--%>
-			<%--window.location.href = "${pageContext.request.contextPath}/companyIndex.jsp";--%>
-			<%--break;--%>
-		<%--case 'admin':--%>
-			<%--break;--%>
-		<%--default:--%>
-			<%--window.location.href = "${pageContext.request.contextPath}/index.jsp";--%>
-		<%--}--%>
-	<%--}--%>
+
 	$("#username").text(getCookie("username"));
 </script>
 </html>

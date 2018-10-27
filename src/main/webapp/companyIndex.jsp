@@ -55,12 +55,12 @@
 			<div title="设备管理"
 				 data-options="selected:true,iconCls:'icon-wenzhangs'"
 				 style="padding: 10px; height: 10px;">
-				<a href="javascript:openTab(' 设备管理','devicemanage.jsp','icon-wenzhang')"
+				<a href="javascript:openTab(' 设备管理','/company/devicemanage.jsp','icon-wenzhang')"
 						class="easyui-linkbutton"
 						data-options="plain:true,iconCls:'icon-wenzhang'"
 						style="width: 150px;"> 设备管理</a>
 
-				<a href="javascript:openTab(' 维修申请单','resumeInfo.jsp','icon-wenzhang')"
+				<a href="javascript:openTab(' 维修申请单','/company/weixiushenqing.jsp','icon-wenzhang')"
 						class="easyui-linkbutton"
 						data-options="plain:true,iconCls:'icon-wenzhang'"
 						style="width: 150px;"> 维修申请单</a>
@@ -70,10 +70,10 @@
 				data-options="selected:true,iconCls:'icon-wenzhangs'"
 				style="padding: 10px; height: 10px;">
 
-				<a href="javascript:openTab(' 实习评价表','companyAssessInfo.jsp','icon-wenzhang')"
+				<a href="javascript:openTab(' 工单反馈','/company/companyAssessInfo.jsp','icon-wenzhang')"
 				   class="easyui-linkbutton"
 				   data-options="plain:true,iconCls:'icon-wenzhang'"
-				   style="width: 150px;"> 设备使用情况反馈</a>
+				   style="width: 150px;"> 反馈</a>
 
 			</div>
 			<div title="系统管理" data-options="iconCls:'icon-item'"

@@ -125,7 +125,7 @@
 
 	//查看申请详情
     function seedetail(val,row) {
-        return "<a href='${pageContext.request.contextPath}/views/deviceDetail.jsp?jId="
+        return "<a href='${pageContext.request.contextPath}/views/company/deviceDetail.jsp?jId="
             + row.device.id + "&vId="+row.id+"' target='_blank'>查看详情</a>";
     }
 

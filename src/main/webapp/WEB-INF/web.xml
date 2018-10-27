@@ -4,9 +4,9 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	id="WebApp_ID" version="2.5">
 	<display-name>PractiveSys</display-name>
-	<welcome-file-list>
-		<welcome-file>login.jsp</welcome-file>
-	</welcome-file-list>
+	<!--<welcome-file-list>-->
+		<!--<welcome-file>login.jsp</welcome-file>-->
+	<!--</welcome-file-list>-->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>classpath:spring-context.xml</param-value>
@@ -37,6 +37,10 @@
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
+
+	<!--<listener>-->
+		<!--<listener-class>com.hik.listener.PropertiesListener</listener-class>-->
+	<!--</listener>>-->
 	<!-- spring请求配置，指向springmvc的核心配置文件，定义所有以.do结尾的请求都被springmvc拦截 -->
 	<servlet>
 		<servlet-name>springMVC</servlet-name>

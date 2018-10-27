@@ -49,15 +49,11 @@
 			</div>
 			<div title="设备信息" data-options="iconCls:'icon-item'"
 				style="padding: 10px; border: none;">
-				<a href="javascript:openTab(' 设备信息','companyRec.jsp','icon-lxr')"
+				<a href="javascript:openTab(' 设备信息','/user/companyRec.jsp','icon-lxr')"
 					class="easyui-linkbutton"
 					data-options="plain:true,iconCls:'icon-lxr'" style="width: 150px;">
 					设备信息</a>
-				<%--<a href="javascript:openTab(' 我的申请','deviceDetail.jsp','icon-lxr')"--%>
-					<%--class="easyui-linkbutton"--%>
-					<%--data-options="plain:true,iconCls:'icon-lxr'" style="width: 150px;">--%>
-					<%--我的申请</a>--%>
-				<a href="javascript:openTab(' 我的申请维修单','myapply.jsp','icon-lxr')"
+				<a href="javascript:openTab(' 我的申请维修单','/user/myapply.jsp','icon-lxr')"
 				   class="easyui-linkbutton"
 				   data-options="plain:true,iconCls:'icon-lxr'" style="width: 150px;">
 					我的申请维修单</a>
@@ -117,10 +113,7 @@
 	function loginRedirect() {
 		var usertype = getCookie("usertype");
 		switch (usertype) {
-		case 'teacher':
-			window.location.href = "${pageContext.request.contextPath}/teacherIndex.jsp";
-			break;
-		case 'company':
+		case 'engineer':
 			window.location.href = "${pageContext.request.contextPath}/companyIndex.jsp";
 			break;
 		case 'admin':

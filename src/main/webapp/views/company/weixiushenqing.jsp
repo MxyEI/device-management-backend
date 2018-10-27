@@ -21,10 +21,10 @@
 <body style="margin: 1px;" id="ff">
 	<div id="tb">
 		<div>
-			&nbsp;设备编码：&nbsp;<input type="text" id="username" size="20"
-				onkeydown="if(event.keyCode==13) searchUser()" />
+			&nbsp;设备名称：&nbsp;<input type="text" id="schdevicename" size="20"
+				onkeydown="if(event.keyCode==13) searchdevice()" />
 			
-			&nbsp;&nbsp;<a onclick="searchUser()" class="easyui-linkbutton"
+			&nbsp;&nbsp;<a onclick="searchdevice()" class="easyui-linkbutton"
 				iconCls="icon-search" plain="true">搜索</a>
 		</div>
 	</div>
@@ -144,50 +144,7 @@
 	}
 
 	function sendResume(success, id,userid,jobid) {
-		var existsuc=false;
-		if(success==false){
-            $.ajax({
-                type : "get",
-                url : "${pageContext.request.contextPath}/userDevices/uid/"+userid,
-                success : function(result) {
-                    console.log(result.data.length);
-                    for(var i=0;i<result.data.length;i++){
-                        if(result.data[i].success==true){
-                            console.log("success2::"+result.data[i].success);
-                            existsuc=true;
-                            break;
-						}
-					}
-                    if(existsuc==false){
-                        $.ajax({
-                            type : "PATCH",
-                            url : "${pageContext.request.contextPath}/userDevices",
-                            data : {
-                                "id" : id,
-                                "userid":userid,
-                                "success" : true
-                            },
-                            success : function(result) {
-                                if (result.resultCode == 200) {
-                                    $("#dg").datagrid("reload");
-                                } else {
-                                    $.messager.alert("系统提示", "操作失败");
-                                }
-                            },
-                            error : function() {
-                                $.messager.alert("系统提示", "操作失败");
-                            }
-                        });
-                    }else{
-                        $.messager.alert("系统提示", "该用户已经存在被批准的设备维修工单");
-                    }
 
-                },
-                error : function() {
-                    $.messager.alert("系统提示", "操作失败");
-                }
-            });
-		}else{
             $.ajax({
                 type : "PATCH",
                 url : "${pageContext.request.contextPath}/userDevices",
@@ -211,9 +168,6 @@
 		}
 
 
-
-	}
-
 	function formatHref(val, row) {
 		var str = new StringBuffer();
 		str.append("<a onclick='sendResume(");
@@ -225,9 +179,9 @@
 	}
 
 
-	function searchUser() {
+	function searchdevice() {
 		$("#dg").datagrid('load', {
-			"user.username" : $("#username").val(),
+			"device.name" : $("#schdevicename").val(),
 			"companyId":getCookie("id")
 		});
 	}

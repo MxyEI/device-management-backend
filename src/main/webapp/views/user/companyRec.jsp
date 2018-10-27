@@ -23,13 +23,10 @@
 </head>
 <body style="margin: 1px;" id="ff">
 	<div id="tb">
-		<div>
-			&nbsp;公司名称：&nbsp;<input type="text" id="startTime" size="20"
-				readonly="readonly" />&nbsp; &nbsp;设备名称：&nbsp;<input type="text"
-				id="endTime" size="20" readonly="readonly" />&nbsp;<a
-				onclick="searchJob()" class="easyui-linkbutton"
-				iconCls="icon-search">搜索</a>
-		</div>
+		<%--<div>--%>
+			<%--&nbsp;企业(供应商)名称：&nbsp;<input type="text" id="comname" size="20" onkeydown="if(event.keyCode==13) searchuserdevice()" />--%>
+			<%--<a onclick="searchuserdevice()" class="easyui-linkbutton" iconCls="icon-search" plain="true">搜索</a>--%>
+		<%--</div>--%>
 	</div>
 	<table id="dg"></table>
 </body>
@@ -115,8 +112,14 @@
 
 	function formatHref(val, row) {
 	    //传参 企业id
-		return "<a href='${pageContext.request.contextPath}/views/recruitDetail.jsp?id="
+		return "<a href='${pageContext.request.contextPath}/views/company/deviceList.jsp?id="
 				+ row.id + "' target='_blank'>查看该公司设备列表</a>";
 	}
+
+    function searchuserdevice() {
+        $("#dg").datagrid('load', {
+            "name" : $("#comname").val()
+        });
+    }
 </script>
 </html>

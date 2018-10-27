@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>实习单位信息</title>
+<title>企业信息</title>
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/jquery-easyui-1.3.3/themes/default/easyui.css">
 <link rel="stylesheet" type="text/css"
@@ -42,7 +42,7 @@
 			<form id="companyForm">
 				<table class="table table-hover table-condensed">
 					<tr>
-						<th>实习单位名称</th>
+						<th>企业(供应商)名称</th>
 						<td><input name="name" type="text" class="easyui-validatebox"
 							id="name" data-options="required:true"></td>
 					</tr>

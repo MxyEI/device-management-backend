@@ -34,10 +34,8 @@
 			<a onclick="deleteDevice()" class="easyui-linkbutton" iconCls="icon-remove" plain="true">删除</a>
 		</div>
 		<div>
-			&nbsp;设备名称：&nbsp;<input type="text" id="jobname" size="20"
-				onkeydown="if(event.keyCode==13) searchJob()" />&nbsp; <a
-				onclick="searchJob()" class="easyui-linkbutton"
-				iconCls="icon-search" plain="true">搜索</a>
+			&nbsp;设备名称：&nbsp;<input type="text" id="jobname" size="20" onkeydown="if(event.keyCode==13) searchDevice()" />&nbsp;
+			<a onclick="searchDevice()" class="easyui-linkbutton" iconCls="icon-search" plain="true">搜索</a>
 		</div>
 	</div>
 	<table id="dg"></table>
@@ -46,7 +44,7 @@
 		closed="true" buttons="#dlg-buttons">
 		<div class="middle-box text-center loginscreen  animated fadeInDown">
 			<div>
-				<form id="jobForm" method="post" style="">
+				<form id="deviceForm" method="post" style="">
 					<table class="table table-hover table-condensed">
 						<tr>
 							<th>设备名称</th>
@@ -91,7 +89,7 @@
 	</div>
 </body>
 <script type="text/javascript">
-	/* 查询的是公司对应的岗位，所以需要先获取公司id */
+	/* 查询的是公司对应的设备，所以需要先获取公司id */
 	var url = "${pageContext.request.contextPath}/device";
 	var method;
 	var deviceDescribe;
@@ -166,10 +164,10 @@
 				formatter : function(value, row, index) {
 
                     if(value==true){
-                        return "运行"
+                        return "故障"
                     }else{
                         //console.log(row);
-                        return "未运行"
+                        return "正常"
                     }
                 }
             },{
@@ -210,7 +208,7 @@
 	});
 
 	/* 查找设备 */
-	function searchJob() {
+	function searchDevice() {
 		$("#dg").datagrid('load', {
 			"name" : $("#jobname").val(),
             "companyId" : getCookie("id")
@@ -301,7 +299,7 @@
 		}
 		var row = selectedRows[0];
 		$("#dlg").dialog("open").dialog("setTitle", "修改设备");
-		$('#jobForm').form('load', row);
+		$('#deviceForm').form('load', row);
         deviceDescribe.html(row.deviceDescribe);
         deviceDescribe.edit.setHeight(deviceDescribe.edit.doc.body.scrollHeight);
 		method = "PATCH";
@@ -309,7 +307,7 @@
 	}
 
 	function formatHref(val, row) {
-		return "<a href='${pageContext.request.contextPath}/views/deviceDetail.jsp?id="
+		return "<a href='${pageContext.request.contextPath}/views/company/deviceDetail.jsp?id="
 				+ row.id + "' target='_blank'>查看详情</a>";
 	}
 
