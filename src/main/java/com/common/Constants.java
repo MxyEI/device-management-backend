@@ -3,8 +3,8 @@ package com.common;
 
 /**
  * @Description: 常量类
- * @author: hw   
- * @date: 2018年3月20日 下午12:27:37 
+ * @author: mxy
+ *
  */
 public class Constants {
 	

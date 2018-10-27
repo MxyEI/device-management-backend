@@ -2,8 +2,8 @@ package com.common;
 
 /**
  * @Description: 响应结果生成工具
- * @author: hw
- * @date: 2018年3月20日 下午12:28:22
+ * @author: mxy
+ *
  */
 public class ResultGenerator {
 	private static final String DEFAULT_SUCCESS_MESSAGE = "SUCCESS";

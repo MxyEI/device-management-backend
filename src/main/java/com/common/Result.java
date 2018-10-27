@@ -8,8 +8,8 @@ import lombok.NoArgsConstructor;
 
 /**
  * @Description: 结果
- * @author: hw
- * @date: 2018年3月20日 下午12:28:00
+ * @author: mxy
+ *
  */
 @Data
 @NoArgsConstructor
